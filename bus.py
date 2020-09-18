@@ -30,6 +30,10 @@ def get_next_buses(app_id, app_key, bus_stop: dict):
     resp = requests.get(url=API_NEXT_BUSES.format(bus_stop["atcocode"], app_id, app_key))
 
     if 200 <= resp.status_code <= 299:
-        return resp.json()["departures"]["F"]
+        data = resp.json()["departures"]
+        dep = []
+        for bus_list in data.values():
+            dep += bus_list
+        return dep
     else:
         raise Exception("Failed to get next buses: status {0}".format(resp.status_code))

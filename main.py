@@ -13,19 +13,19 @@ def index():
 
 @app.route("/busInfo")
 def busInfo():
-
     postcode = request.args.get('postcode')
-
     lat, lon = bus.get_lat_lon(postcode)
+
     bus_stops = bus.get_bus_stops(args.app_id, args.app_key, lat, lon)
-    departures_closest = bus.get_next_buses(args.app_id, args.app_key, bus_stops[0])
+    buses = []
 
-    buses_closest = [(dep["operator_name"], dep["aimed_departure_time"]) for dep in departures_closest]
-    bus_stop_names = [(stop["name"], stop["distance"], buses_closest) for stop in bus_stops]
-    #bus_info = [stop['distance', 'description']]
+    for i, stop in enumerate(bus_stops):
+        departures_closest = bus.get_next_buses(args.app_id, args.app_key, bus_stops[i])
+        buses.append([(dep["operator_name"], dep["aimed_departure_time"]) for dep in departures_closest])
 
+    bus_times = [(stop["name"], stop["distance"], buses[i]) for i, stop in enumerate(bus_stops)]
 
-    return render_template('info.html', postcode=postcode, bus_stop_names=bus_stop_names)
+    return render_template('info.html', postcode=postcode, bus_times=bus_times)
 
 
 if __name__ == "__main__":
