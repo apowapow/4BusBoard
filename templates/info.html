@@ -6,5 +6,14 @@
     <div>
         <p>You entered postcode <span>{{ postcode }}</span></p>
     </div>
+    {% for name, distance, buses in bus_stop_names %}
+        <div>{{ name }} {{ distance }}
+            <ul>
+                {% for operator_name, aimed_departure_time in buses %}
+                    <li>{{ operator_name }} {{ aimed_departure_time }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
