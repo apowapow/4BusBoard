@@ -1,11 +1,16 @@
 {% extends "layout.html" %}
 {% block title %}Bus Information{% endblock %}
 {% block content %}
-<meta http-equiv="refresh" content="30"/>
+<!--<meta http-equiv="refresh" content="30"/>-->
+<meta/>
 <div class="container body-content">
     <h2>Bus Information</h2>
     <div>
-        <p>You entered postcode <span>{{ postcode }}</span></p>
+        <p>Postcode: <b><span>{{ postcode }}</span></b></p>
+        <p>Bus times correct as of: <b><span id="time"></span></b></p>
+    </div>
+    <div>
+        <p>{{ error_message }}</p>
     </div>
     {% for name, distance, buses in bus_times %}
         <div>
@@ -20,4 +25,8 @@
         </div>
     {% endfor %}
 </div>
+<script language="javascript">
+    var today = new Date();
+    document.getElementById('time').innerHTML=today;
+</script>
 {% endblock %}

@@ -2,9 +2,9 @@ import requests
 from typing import Tuple, List, Dict
 
 
-API_POSTCODES = "http://api.postcodes.io/postcodes/{0}"
-API_NEARBY_STOPS = "http://transportapi.com/v3/uk/places.json?lat={0}&lon={1}&type=bus_stop&app_id={2}&app_key={3}"
-API_NEXT_BUSES = "http://transportapi.com/v3/uk/bus/stop/{0}/live.json?app_id={1}&app_key={2}"
+API_POSTCODES = "https://api.postcodes.io/postcodes/{0}"
+API_NEARBY_STOPS = "https://transportapi.com/v3/uk/places.json?lat={0}&lon={1}&type=bus_stop&app_id={2}&app_key={3}"
+API_NEXT_BUSES = "https://transportapi.com/v3/uk/bus/stop/{0}/live.json?app_id={1}&app_key={2}"
 
 
 def get_lat_lon(postcode: str) -> Tuple:

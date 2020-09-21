@@ -8,14 +8,33 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="messageForm" action="/busInfo" method="get">
-                <fieldset>
-                    <legend>Postcode: </legend>
-                    <input type="text" name="postcode">
-                    <input type="submit" value="Get Bus Info" />
-                </fieldset>
-            </form>
+            <input id="bus_postcode" type="text" placeholder="Enter postcode">
+            <button id="bus_button" type="button">Get Bus Info</button>
+            <br>
+            <span id="error_msg" style="color: red;"></span>
         </div>
     </div>
 </div>
+<script language="javascript">
+    document.getElementById('bus_postcode').onkeypress = function(e){
+        if(e.which == 13)
+            validate_postcode();
+    };
+    document.getElementById('bus_button').onclick = validate_postcode;
+
+    function validate_postcode() {
+        postcode = document.getElementById("bus_postcode").value;
+
+        if(postcode != null)
+           postcode = postcode.replace(/\s/g, '');
+
+        if(postcode.length >= 6 && postcode.length <= 7) {
+            document.getElementById("error_msg").innerHTML = "";
+            window.location.href = '/busInfo?postcode=' + postcode;
+
+        } else if(postcode.length > 0) {
+            document.getElementById("error_msg").innerHTML = "Invalid postcode " + postcode;
+        }
+    }
+</script>
 {% endblock %}
